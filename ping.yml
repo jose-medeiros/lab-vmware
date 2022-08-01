@@ -1,6 +1,6 @@
 ---
-  name: Check connectivity to remote servers
-  hosts: all
+
+- hosts: all
+  gather_facts: false
   tasks:
-    - name: ping
-      ping:
+    - ping:
