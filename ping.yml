@@ -1,6 +1,4 @@
----
-
-- hosts: all
-  gather_facts: false
+- hosts:
+    - all
   tasks:
-    - ping:
+    - action: ping
