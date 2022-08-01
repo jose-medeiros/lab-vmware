@@ -1,0 +1,33 @@
+---
+- name: Configuring Apache for webservers
+  hosts: all
+  tasks:
+    - name: Install Apache
+      yum:
+        name:
+          - httpd
+          - mod_ssl
+          - firewalld
+        state: present
+   
+    - name: Start firewalld
+      service: 
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: Start httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Enable firewall web ports
+      firewalld:
+        port: "{{ item }}-{{ item }}/tcp"
+        immediate: yes
+        permanent: yes
+        state: enabled
+      loop:
+        - 80
+        - 443
